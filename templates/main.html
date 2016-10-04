@@ -8,9 +8,12 @@
 	<link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../static/fonts/ionicons.min.css">
 	<link rel="stylesheet" href="../static/css/wall.css">
+
+
 </head>
 
 <body>
+	<div id="loader"></div>
 	<div>
 		<nav class="navbar navbar-default navigation-clean-button">
 			<div class="container">
@@ -32,13 +35,108 @@
 		{% endfor %} {% endif %} {% endwith %}
 
 		<div class="row">
+
+		<div id='left-box' class="col-md-6">
+			<h3 id='left-head'>Enter your code:</h3>
+
+				<form>
+				  <div class="form-group">
+				    <label for="exampleSelect1">Select</label>
+				    <select class="form-control" id="exampleSelect1">
+				      <option>Python</option>
+				      <option>JavaScript</option>
+				      <option>SQL</option>
+				      <option>Flask</option>
+				      <option>Django</option>
+				    </select>
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleTextarea">Example textarea</label>
+				    <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleInputFile">File input</label>
+				    <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+				</div>
+
+				  <button type="submit" class="btn btn-primary">Submit</button>
+				</form>
+
 		</div>
 
-		<!-- page code here -->
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<div  class="col-md-6">
+			<h3 id='right-head'>Your Snippets:</h3>
+			<div id='right-box' >
+
+				<div class="snippet">
+					<div >
+						<form action="" method="post">
+							<label id='code-title' for="">Python</label>
+							<input type="hidden" name='delete-snippet'>
+							<button id="delete" type="submit" name='submit-delete'>X</button>
+						</form>
+					</div>
+					<textarea id='textarea' name="code" rows="8" cols="65"></textarea>
+					<div id="description">
+						<h5>This is a for loop in Python</h5>
+					</div>
+					<div id="spacer"></div>
+				</div>
+
+			</div>
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		</div>
+	</div> <!--end of row-->
 	</div><!--container end-->
 		<div class="footer-clean">
 			<footer>
@@ -51,7 +149,16 @@
 				</div>
 			</footer>
 		</div>
-	<script src="../static/js/jquery.min.js"></script>
+
+		<div id="pages">
+	    <a href="index.html"></a>
+	    <a href="page2.html"></a>
+	    <a href="page3.html"></a>
+	    <a href="page4.html"></a>
+	    <a href="page5.html"></a>
+	    <a href="page6.html"></a>
+	</div>
+	<script src="http://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
 	<script src="../static/bootstrap/js/bootstrap.min.js"></script>
 	<script src="../static/js/scripts.js"></script>
 </body>
