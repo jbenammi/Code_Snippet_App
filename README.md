@@ -1,4 +1,4 @@
-This is a code snippet app that takes plain text and applies syntax highlighting based on the language. The user can save and delete snippets as well as update.
+This is a code snippet app that takes plain text and applies syntax highlighting and formatting based on the language. The user can log in and out, save and delete as well as update code snippets.
 
 Technologies used:
 
