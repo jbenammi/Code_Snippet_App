@@ -10,6 +10,6 @@ Technologies used:
 * HTML/CSS
 * AJAX - In Progress
 
-This was made as part from scratch by myself with some molular functionality imported from open libraries. Ajax is currently being added.
+This was made from scratch by myself with some molular functionality imported from open libraries. Ajax is currently being added.
 
 NM
