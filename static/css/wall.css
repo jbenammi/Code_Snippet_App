@@ -278,17 +278,39 @@ label {
     border-radius: 20px;
 }
 
+select{
+    color: #309aa8 !important;
+    font-weight: 200;
+}
+option:not(:checked) {
+    background-color: #309aa8 !important;
+    color:white !important;
+}
+
+#exampleSelect1:focus {
+    outline: none !important;
+    border:1px solid #309aa8;
+    box-shadow: 0 0 2px #309aa8;
+}
+
+#input-textarea:focus {
+    outline: none !important;
+    border:1px solid #309aa8;
+    box-shadow: 0 0 2px #309aa8;
+}
 
 /********* SNIPPET *****************/
 
 
+
+
 #right-box{
-  height: 400px;
+  height: 500px;
   overflow-y: scroll;;
 }
 
 .snippet {
-  margin: 20px 30px;
+  margin: 0px 30px;
 }
 
 #spacer {
@@ -298,7 +320,7 @@ label {
 
 #code-title{
   font-weight: 200;
-  font-size: 1.7em;
+  font-size: 1.2em;
   color: #309aa8;
   display: inline-block;
 }
@@ -306,6 +328,8 @@ label {
 #description h5{
   font-weight: 200;
   color: grey;
+  margin-top: 20px;
+  text-align: center;
 }
 
 #delete {
@@ -313,8 +337,50 @@ label {
   border: none;
   background-color: transparent;
   color: lightgrey;
-  font-size: 1.3em;
-  font-weight: bold;
+  font-size: 1em;
+  font-weight:bold;
+}
+
+#snippet-textarea {
+  overflow-y: scroll;
+  height: 150px;
+  background-color: #2b2b2b;
+  padding: 10px;
+  word-wrap: break-word;
+
+
+}
+
+.update {
+
+  border: 1px solid #309aa8;
+  width: 200px;
+  background-color: #309aa8;
+  color: white;
+  font-size: 1.2em;
+  font-weight: 200;
+  visibility: hidden;
+
+
+}
+
+.update-visible {
+
+  border: 1px solid #309aa8;
+  width: 100px;
+  background-color: #309aa8;
+  color: white;
+  font-size: 1.2em;
+  font-weight: 200;
+  visibility: visible;
+
+
+}
+
+#snippet-textarea:focus {
+    outline: none !important;
+    border:1px solid #309aa8;
+    box-shadow: 0 0 2px #309aa8;
 }
 
 /********* FOOTER *****************/

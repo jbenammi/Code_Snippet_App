@@ -1,8 +1,15 @@
-from flask import Flask, request, redirect, render_template, session, flash
+from flask import Flask, request, redirect, render_template, session, flash,jsonify
 from mysqlconnection import MySQLConnector
 from datetime import datetime, timedelta
 from flask_bcrypt import Bcrypt
 import re
+import jinja2_highlight
+
+class MyFlask(Flask):
+    jinja_options = dict(Flask.jinja_options)
+    jinja_options.setdefault('extensions',
+        []).append('jinja2_highlight.HighlightExtension')
+
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 mysql = MySQLConnector(app,'snippets')
@@ -17,6 +24,11 @@ def get_user(email):
     user = mysql.query_db(user_query, query_data)
     return user
 
+def get_snippets(user_id):
+    user_query = "SELECT * FROM snippets WHERE user_id = :id"
+    query_data = { 'id': user_id }
+    user_snippets = mysql.query_db(user_query, query_data)
+    return user_snippets
 
 
 
@@ -24,8 +36,8 @@ def get_user(email):
 def index():
     return render_template('index.html')
 
-@app.route('/main', methods=['GET', 'POST'])
-def wall():
+@app.route('/show', methods=['GET', 'POST'])
+def show_all():
     if request.method == 'GET':
 
         #get current user dictionary
@@ -33,7 +45,85 @@ def wall():
 
         #get basic scrubbed info of user
         name = current_user[0]['first_name']
-        return render_template('main.html', current_name = name)
+
+        #get all snippets
+        query = "SELECT * FROM snippets WHERE user_id = :id"
+        data = {'id' : session['id']}
+
+        snippets = mysql.query_db(query, data)
+        return render_template('main.html', current_name = name, all_snippets=snippets)
+
+@app.route('/create', methods=['POST'])
+def create_snippet():
+
+        #get form data
+        language = request.form['language']
+        code = request.form['code']
+        description = request.form['description']
+
+        #query DB
+        query = "INSERT INTO snippets(language, code, description, user_id, created_at, updated_at) VALUES(:language, :code, :description, :user_id, NOW(), NOW())"
+        query_data = {'language' : language, 'code' : code, 'description' : description, 'user_id' : session['id']}
+        mysql.query_db(query, query_data)
+
+        return redirect('/show')
+
+@app.route('/delete', methods=['POST'])
+def delete_snippet():
+    print request.form
+
+    #get form data
+    snippet_id = request.form['snippet-id']
+
+    query = "DELETE FROM snippets WHERE id = :id"
+    data = {'id' : snippet_id}
+    mysql.query_db(query, data)
+
+    return redirect('/show')
+
+
+@app.route('/update', methods=['POST'])
+def dupdate_snippet():
+    print request.form
+
+    #get form data
+    snippet_id = request.form['snippet-id']
+
+    #get message from DB
+    query = "SELECT * FROM snippets WHERE id = :snippet_id"
+    data = {'snippet_id' : snippet_id}
+
+    cur_snippet = mysql.query_db(query, data)
+    print cur_snippet
+
+    return redirect('/show')
+
+@app.route('/snippets/index_json')
+def index_json():
+    query = "SELECT * FROM snippets WHERE user_id = :id"
+    data = {"id" : session['id']}
+    user_snippets = mysql.query_db(query, data)
+    return jsonify(all_snippets = user_snippets)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
