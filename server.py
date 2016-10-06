@@ -33,13 +33,11 @@ def get_snippets(user_id):
 
 
 @app.route('/', methods=['GET'])
+def register():
+    return render_template('register.html')
+
+@app.route('/home', methods=['GET'])
 def index():
-    return render_template('index.html')
-
-@app.route('/show', methods=['GET', 'POST'])
-def show_all():
-    if request.method == 'GET':
-
         #get current user dictionary
         current_user = get_user(session['email'])
 
@@ -51,7 +49,22 @@ def show_all():
         data = {'id' : session['id']}
 
         snippets = mysql.query_db(query, data)
-        return render_template('main.html', current_name = name, all_snippets=snippets)
+        return render_template('index.html', current_name = name, all_snippets=snippets)
+
+@app.route('/notes/html', methods=['GET'])
+def show_all():
+        #get current user dictionary
+        current_user = get_user(session['email'])
+
+        #get basic scrubbed info of user
+        name = current_user[0]['first_name']
+
+        #get all snippets
+        query = "SELECT * FROM snippets WHERE user_id = :id"
+        data = {'id' : session['id']}
+
+        snippets = mysql.query_db(query, data)
+        return render_template('partials/snippets.html', current_name = name, all_snippets=snippets)
 
 @app.route('/create', methods=['POST'])
 def create_snippet():
@@ -66,7 +79,7 @@ def create_snippet():
         query_data = {'language' : language, 'code' : code, 'description' : description, 'user_id' : session['id']}
         mysql.query_db(query, query_data)
 
-        return redirect('/show')
+        return redirect('/home')
 
 @app.route('/delete', methods=['POST'])
 def delete_snippet():
@@ -79,7 +92,7 @@ def delete_snippet():
     data = {'id' : snippet_id}
     mysql.query_db(query, data)
 
-    return redirect('/show')
+    return redirect('/home')
 
 
 @app.route('/update', methods=['POST'])
@@ -96,7 +109,7 @@ def dupdate_snippet():
     cur_snippet = mysql.query_db(query, data)
     print cur_snippet
 
-    return redirect('/show')
+    return redirect('/home')
 
 @app.route('/snippets/index_json')
 def index_json():
@@ -104,31 +117,6 @@ def index_json():
     data = {"id" : session['id']}
     user_snippets = mysql.query_db(query, data)
     return jsonify(all_snippets = user_snippets)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @app.route('/create_user', methods=['POST'])
 def create():
@@ -169,7 +157,7 @@ def create():
         session['name'] = user[0]['first_name']
         session['email'] = user[0]['email']
 
-        return redirect('/main')
+        return redirect('/home')
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
@@ -183,7 +171,7 @@ def login():
             session['id'] = user[0]['id']
             session['name'] = user[0]['first_name']
             session['email'] = user[0]['email']
-            return redirect('/main')
+            return redirect('/home')
 
         else:
             flash("Please try again")
@@ -205,6 +193,6 @@ def logout():
 
     else:
         flash("Already logged out")
-        return redirect('/')
+        return redirect('/home')
 
 app.run(debug=True)

@@ -4,7 +4,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title></>SNIPPETS</title>
+	<title>
+		</>SNIPPETS</title>
 	<link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../static/fonts/ionicons.min.css">
 	<link rel="stylesheet" href="../static/css/wall.css">
@@ -35,13 +36,13 @@
 
 		<div class="row">
 
-		<div id='left-box' class="col-md-4">
-			<h3 id='left-head'>Your code:</h3>
+			<div id='left-box' class="col-md-4">
+				<h3 id='left-head'>Your code:</h3>
 
 				<form id='create-form' action="/create" method="post">
-				  <div class="form-group">
-				    <label for="exampleSelect1">Select</label>
-				    <select required name='language' class="form-control" id="exampleSelect1">
+					<div class="form-group">
+						<label for="exampleSelect1">Select</label>
+						<select required name='language' class="form-control" id="exampleSelect1">
 				      <option>Python</option>
 				      <option>JavaScript</option>
 					  <option>Ruby</option>
@@ -49,97 +50,49 @@
 				      <option>HTML</option>
 					  <option>CSS</option>
 				    </select>
-				    <label for="exampleTextarea">Paste</label>
-				    <textarea required name='code' class="form-control" id="input-textarea" rows="10" >
+						<label for="exampleTextarea">Paste</label>
+						<textarea required name='code' class="form-control" id="input-textarea" rows="10">
 				    </textarea>
-					<label for="exampleTextarea">Description</label>
-					<input required type="text" name="description" class="form-control">
-				  </div>
+						<label for="exampleTextarea">Description</label>
+						<input required type="text" name="description" class="form-control">
+					</div>
 
-				  <button type="submit" class="btn btn-primary">Submit</button>
+					<button type="submit" class="btn btn-primary">Submit</button>
 				</form>
 
+			</div>
+
+
+			<div class="col-md-8">
+				<h3 id='right-head'>Your Snippets:</h3>
+				<div id='right-box'>
+
+				</div>
+				<!--right inner box-->
+			</div>
+			<!--col md 8 -->
 		</div>
+		<!--end of row-->
+	</div>
+	<!--container end-->
 
-
-	<div  class="col-md-8">
-		<h3 id='right-head'>Your Snippets:</h3>
-			<div id='right-box' >
-				{%for snippet in all_snippets%}
-				    <div class="snippet">
-				        <div >
-				            <form action="/delete" method="post">
-				                <label id='code-title' for="">{{snippet['language']}}</label>
-				                <input type="hidden" name='delete-snippet'>
-				                <input type="hidden" value={{snippet['id']}} name='snippet-id'>
-				                <button id="delete" type="submit" name='submit-delete'>X</button>
-				            </form>
-				        </div>
-
-				            <form id='code-form' action="/update" method='post'>
-				                <div name="code-edit" id="snippet-textarea" data-toggle="tooltip" title="Click the Code to Edit">
-
-				                    {%if snippet['language'] == 'Python'%}
-				                        {% highlight 'python', lineno='inline' -%}
-				                            {{snippet['code']}}
-				                        {% endhighlight %}
-				                    {%elif snippet['language'] == 'JavaScript'%}
-				                        {% highlight 'javascript', lineno='inline' -%}
-				                            {{snippet['code']}}
-				                        {% endhighlight %}
-				                    {%elif snippet['language'] == 'Ruby'%}
-				                        {% highlight 'ruby', lineno='inline' -%}
-				                            {{snippet['code']}}
-				                        {% endhighlight %}
-				                    {%elif snippet['language'] == 'Flask'%}
-				                        {% highlight 'python', lineno='inline' -%}
-				                            {{snippet['code']}}
-				                        {% endhighlight %}
-				                    {%elif snippet['language'] == 'HTML'%}
-				                        {% highlight 'html', lineno='inline' -%}
-				                            {{snippet['code']}}
-				                        {% endhighlight %}
-				                    {%elif snippet['language'] == 'CSS'%}
-				                        {% highlight 'css', lineno='inline' -%}
-				                            {{snippet['code']}}
-				                        {% endhighlight %}
-				                    {%endif%}
-
-				                </div>
-				                <input type="hidden" value={{snippet['id']}} name='snippet-id'>
-				                <button class="update" type="submit" >Edit</button>
-				                <div  id="description">
-				                    <h5>{{snippet['description']}}</h5>
-				                </div>
-				            </form>
-				        <div id="spacer"></div>
-				    </div>
-				{%endfor%}
-			</div><!--right inner box-->
-		</div><!--col md 8 -->
-	</div> <!--end of row-->
-	</div><!--container end-->
-
-
-
-
-
-		<div class="footer-clean">
-			<footer>
-				<div class="container">
-					<div class="row">
-						<div class="col-md-3 item social"><a href="http://www.facebook.com/nicj.muller"><i class="icon ion-social-facebook"></i></a><a href="http://twitter.com/outliernic"><i class="icon ion-social-twitter"></i></a><a href="http://github.com/NicMuller"><i class="icon ion-social-github"></i></a>
-							<p class="copyright">Nicholis Muller © 2016</p>
-						</div>
+	<!-- <div class="footer-clean">
+		<footer>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3 item social"><a href="http://www.facebook.com/nicj.muller"><i class="icon ion-social-facebook"></i></a><a href="http://twitter.com/outliernic"><i class="icon ion-social-twitter"></i></a><a href="http://github.com/NicMuller"><i class="icon ion-social-github"></i></a>
+						<p class="copyright">Nicholis Muller © 2016</p>
 					</div>
 				</div>
+			</div>
 
 
-			</footer>
-		</div>
+		</footer> -->
+	</div>
 	</div>
 	<script src="http://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
 	<script src="../static/bootstrap/js/bootstrap.min.js"></script>
 	<script src="../static/js/scripts.js"></script>
 </body>
+
 </html>
