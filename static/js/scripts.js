@@ -30,7 +30,7 @@ $(document).ready(function(){
     $(document).on('submit', "#update-form", function(){
         console.log('hit update')
         $.post('/update', $(this).serialize(), function(res){
-            console.log('hit post')
+                console.log('hit post')
         })
 
         $.get('/notes/form', function(res){
@@ -38,7 +38,9 @@ $(document).ready(function(){
         },'html')//get form end
         console.log('hit form')
 
-
+        $.get('/notes/html', function(res){
+            $('#right-box').html(res)
+        }, 'html')//get snippets end
         return false
 
     })//end update

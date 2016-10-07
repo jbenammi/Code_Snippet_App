@@ -114,7 +114,7 @@ def update_snippet():
     snippet_id = request.form['snippet_id']
     code = request.form['code']
     description = request.form['description']
-    language = request.form['description']
+    language = request.form['language']
 
     #update snippet
     query = "UPDATE snippets SET code = :code, description = :description, language = :language, updated_at = NOW() WHERE id = :id"
@@ -122,6 +122,8 @@ def update_snippet():
     mysql.query_db(query, data)
 
     return redirect('/home')
+
+
 
 @app.route('/get_update', methods=['POST'])
 def get_update_snippet():

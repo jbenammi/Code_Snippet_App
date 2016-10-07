@@ -1,10 +1,13 @@
+
+
 {%for snippet in all_snippets%}
+
 <div class="snippet">
     <div>
         <form action="/delete" method="post">
             <label id='code-title'>{{snippet['language']}}</label>
             <input type="hidden" name='delete-snippet'>
-            <input type="hidden" value={{snippet[ 'id']}} name='snippet-id'>
+            <input type="hidden" value={{snippet['id']}} name='snippet-id'>
             <button id="delete" type="submit" name='submit-delete'>X</button>
         </form>
     </div>
@@ -12,7 +15,14 @@
     <form id='code-form' action="/get_update" method='post'>
         <div name="code-edit" id="snippet-textarea">
 
-            {%if snippet['language'] == 'Python'%} {% highlight 'python', lineno='inline' -%} {{snippet['code']}} {% endhighlight %} {%elif snippet['language'] == 'JavaScript'%} {% highlight 'javascript', lineno='inline' -%} {{snippet['code']}} {% endhighlight %}
+            {%if snippet['language'] == 'Python'%}
+              {% highlight 'python', lineno='inline' -%}
+              {{snippet['code']}}
+            {% endhighlight %}
+
+            {%elif snippet['language'] == 'JavaScript'%}
+               {% highlight 'javascript', lineno='inline' -%}
+               {{snippet['code']}} {% endhighlight %}
             {%elif snippet['language'] == 'Ruby'%} {% highlight 'ruby', lineno='inline' -%} {{snippet['code']}} {% endhighlight %} {%elif snippet['language'] == 'Flask'%} {% highlight 'python', lineno='inline' -%} {{snippet['code']}} {% endhighlight %} {%elif
             snippet['language'] == 'HTML'%} {% highlight 'html', lineno='inline' -%} {{snippet['code']}} {% endhighlight %} {%elif snippet['language'] == 'CSS'%} {% highlight 'css', lineno='inline' -%} {{snippet['code']}} {% endhighlight %} {%endif%}
 
