@@ -60,7 +60,7 @@ def show_all():
         name = current_user[0]['first_name']
 
         #get all snippets
-        query = "SELECT * FROM snippets WHERE user_id = :id"
+        query = "SELECT * FROM snippets WHERE user_id = :id ORDER BY created_at desc"
         data = {'id' : session['id']}
 
         snippets = mysql.query_db(query, data)
@@ -69,15 +69,18 @@ def show_all():
 @app.route('/create', methods=['POST'])
 def create_snippet():
 
+        print request.form
+
         #get form data
         language = request.form['language']
         code = request.form['code']
         description = request.form['description']
+        
 
-        #query DB
-        query = "INSERT INTO snippets(language, code, description, user_id, created_at, updated_at) VALUES(:language, :code, :description, :user_id, NOW(), NOW())"
-        query_data = {'language' : language, 'code' : code, 'description' : description, 'user_id' : session['id']}
-        mysql.query_db(query, query_data)
+        # #query DB
+        # query = "INSERT INTO snippets(language, code, description, user_id, created_at, updated_at) VALUES(:language, :code, :description, :user_id, NOW(), NOW())"
+        # query_data = {'language' : language, 'code' : code, 'description' : description, 'user_id' : session['id']}
+        # mysql.query_db(query, query_data)
 
         return redirect('/home')
 
@@ -95,9 +98,26 @@ def delete_snippet():
     return redirect('/home')
 
 
-@app.route('/update', methods=['POST'])
-def dupdate_snippet():
-    print request.form
+# @app.route('/update', methods=['POST'])
+# def update_snippet():
+#     print request.form
+#
+#     #get form data
+#     snippet_id = request.form['snippet-id']
+#
+#     #get message from DB
+#     query = "SELECT * FROM snippets WHERE id = :snippet_id"
+#     data = {'snippet_id' : snippet_id}
+#
+#     cur_snippet = mysql.query_db(query, data)
+#     print cur_snippet
+#
+#     return redirect('/home')
+
+
+@app.route('/get_update', methods=['POST'])
+def get_update_snippet():
+
 
     #get form data
     snippet_id = request.form['snippet-id']
@@ -107,9 +127,8 @@ def dupdate_snippet():
     data = {'snippet_id' : snippet_id}
 
     cur_snippet = mysql.query_db(query, data)
-    print cur_snippet
 
-    return redirect('/home')
+    return jsonify(cur_snippet=cur_snippet[0])
 
 @app.route('/snippets/index_json')
 def index_json():
@@ -120,8 +139,7 @@ def index_json():
 
 @app.route('/create_user', methods=['POST'])
 def create():
-    print "hit"
-    print request.form
+
 
 #validation for exist done in view with HTML
     first_name = request.form['first_name']

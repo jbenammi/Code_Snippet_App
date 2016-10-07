@@ -9,8 +9,8 @@
         </form>
     </div>
 
-    <form id='code-form' action="/update" method='post'>
-        <div name="code-edit" id="snippet-textarea" data-toggle="tooltip" title="Click the Code to Edit">
+    <form id='code-form' action="/get_update" method='post'>
+        <div name="code-edit" id="snippet-textarea">
 
             {%if snippet['language'] == 'Python'%} {% highlight 'python', lineno='inline' -%} {{snippet['code']}} {% endhighlight %} {%elif snippet['language'] == 'JavaScript'%} {% highlight 'javascript', lineno='inline' -%} {{snippet['code']}} {% endhighlight %}
             {%elif snippet['language'] == 'Ruby'%} {% highlight 'ruby', lineno='inline' -%} {{snippet['code']}} {% endhighlight %} {%elif snippet['language'] == 'Flask'%} {% highlight 'python', lineno='inline' -%} {{snippet['code']}} {% endhighlight %} {%elif
