@@ -15,8 +15,6 @@ bcrypt = Bcrypt(app)
 mysql = MySQLConnector(app,'snippets')
 app.secret_key = "13k3dfgdfg78987"
 
-
-
 #methods in global scope for modularity to add new features later
 def get_user(email):
     user_query = "SELECT * FROM users WHERE email = :email LIMIT 1"
@@ -29,8 +27,6 @@ def get_snippets(user_id):
     query_data = { 'id': user_id }
     user_snippets = mysql.query_db(user_query, query_data)
     return user_snippets
-
-
 
 @app.route('/', methods=['GET'])
 def register():
@@ -122,8 +118,6 @@ def update_snippet():
     mysql.query_db(query, data)
 
     return redirect('/home')
-
-
 
 @app.route('/get_update', methods=['POST'])
 def get_update_snippet():
