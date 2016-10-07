@@ -8,7 +8,7 @@ Technologies used:
 * Flask
 * Bootstrap
 * HTML/CSS
-* AJAX - In Progress
+* AJAX 
 
 This was made from scratch by myself with some molular functionality imported from open libraries. Ajax is currently being added.
 
