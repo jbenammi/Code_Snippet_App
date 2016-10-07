@@ -1,0 +1,21 @@
+<form id='create-form' action="/create" method="post">
+    <div class="form-group">
+        <label for="exampleSelect1">Select</label>
+        <select required name='language' class="form-control" id="exampleSelect1">
+      <option>Python</option>
+      <option>JavaScript</option>
+      <option>Ruby</option>
+      <option>Flask</option>
+      <option>HTML</option>
+      <option>CSS</option>
+    </select>
+        <label for="exampleTextarea">Paste</label>
+        <textarea required name='code' class="form-control" id="input-textarea" rows="10">
+    </textarea>
+        <label for="exampleTextarea">Description</label>
+        <input required id='code-description' type="text" name="description" class="form-control" value=''>
+    </div>
+
+
+    <button id='update-snippet' type="submit" class="btn btn-primary">Submit</button>
+</form>

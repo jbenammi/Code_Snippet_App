@@ -1,0 +1,22 @@
+<form id='update-form' action="" method="POST">
+    <div class="form-group">
+        <label for="exampleSelect1">Select</label>
+        <select required name='language' class="form-control" id="exampleSelect1">
+      <option>Python</option>
+      <option>JavaScript</option>
+      <option>Ruby</option>
+      <option>Flask</option>
+      <option>HTML</option>
+      <option>CSS</option>
+    </select>
+        <label for="exampleTextarea">Paste</label>
+        <textarea required name='code' class="form-control" id="input-textarea" rows="10">
+    </textarea>
+        <label for="exampleTextarea">Description</label>
+        <input type='hidden' name='snippet_id' value='123'>
+        <input required id='code-description' type="text" name="description" class="form-control" value=''>
+    </div>
+
+
+    <button id='submit' type="submit" class="btn btn-primary">Update your Snippet</button>
+</form>

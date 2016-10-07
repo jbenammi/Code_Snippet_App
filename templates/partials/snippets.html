@@ -2,7 +2,7 @@
 <div class="snippet">
     <div>
         <form action="/delete" method="post">
-            <label id='code-title' for="">{{snippet['language']}}</label>
+            <label id='code-title'>{{snippet['language']}}</label>
             <input type="hidden" name='delete-snippet'>
             <input type="hidden" value={{snippet[ 'id']}} name='snippet-id'>
             <button id="delete" type="submit" name='submit-delete'>X</button>
